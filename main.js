@@ -40,6 +40,12 @@ Vue.component('form-servicio', {
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Servicio</h5>
+                <div v-if="has_error" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Opps!</strong> Debes completar ambos campos.
+                    <button type="button" class="close" @click="closeAlert" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <form>
                     <div class="form-group">
                         <label for="name">Nombre</label>
@@ -61,20 +67,41 @@ Vue.component('form-servicio', {
         </div>
     `,
     methods: {
-        save: function() {
-            if (this.servicio.id != '') {
-                index = this.$root.servicios.findIndex(servicio => servicio.id == this.servicio.id)
-                this.$root.servicios[index].name = this.servicio.name;
-                this.$root.servicios[index].description = this.servicio.description;
-            }else{
-                this.$root.servicios.push({id: uuid() ,name: this.servicio.name, description: this.servicio.description})
+        validate: function() {
+            if (this.servicio.name == '' || this.servicio.description == '') {
+                return false;
             }
-            this.clean()
+            return true;
+        },
+        save: function() {
+        if (this.validate()) {
+                console.log('Holis');
+                if (this.servicio.id != '') {
+                    index = this.$root.servicios.findIndex(servicio => servicio.id == this.servicio.id)
+                    this.$root.servicios[index].name = this.servicio.name;
+                    this.$root.servicios[index].description = this.servicio.description;
+                }else{
+                    this.$root.servicios.push({id: uuid() ,name: this.servicio.name, description: this.servicio.description})
+                }
+                this.clean()
+            }else {
+                console.log('Hay error');
+                this.has_error = true;
+            }
         },
         clean: function() {
             this.servicio.id = ''
             this.servicio.name = ''
             this.servicio.description = ''
+            this.has_error = false
+        },
+        closeAlert: function() {
+            this.has_error = false
+        }
+    },
+    data: function() {
+        return {
+            has_error: false
         }
     }
 })
