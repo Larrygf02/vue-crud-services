@@ -7,6 +7,59 @@
             main {
                 font-family: 'medium-content-sans-serif-font';
             }
+
+            .main {
+                display: grid;
+                grid-gap: 2rem;
+            }
+
+            @media (max-width: 576px) {
+                .formservice {
+                    grid-row-start: 1;
+                }
+            }
+            @media (min-width: 576px) {
+                .services {
+                    display:grid; 
+                    grid-template-columns: 1fr; 
+                    grid-gap: 1.5rem;
+                }
+                .main {
+                    display: grid;
+                    grid-auto-flow: row;
+                }
+            }
+            @media (min-width: 768px) {
+                .services {
+                    display:grid; 
+                    grid-template-columns: 1fr 1fr; 
+                    grid-gap: 2rem;
+                }
+                .main {
+                    grid-auto-flow: column;
+                }
+            }
+            @media (min-width: 992px) {
+                .services {
+                    display:grid; 
+                    grid-template-columns: 1fr 1fr 1fr; 
+                    grid-gap: 2rem;
+                }
+                main {
+                    grid-auto-flow: column;
+                }
+            }
+            @media (min-width: 1200px) {
+                .services {
+                    display:grid; 
+                    grid-template-columns: 1fr 1fr 1fr; 
+                    grid-gap: 2rem;
+                }
+                main {
+                    grid-auto-flow: column;
+                }
+            }
+            
         </style>
     </head>
     <body>
@@ -25,6 +78,15 @@
                             </ul>
                         </div>
                     </nav>
+                    <div class="main mt-4">
+                        <div>
+                            <lista-servicios :servicios="servicios"></lista-servicios>
+                        </div>
+                        <div class="formservice">
+                            <form-servicio :servicio="servicio"></form-servicio>
+                        </div>
+                    </div>
+                    <!--
                     <div class="row mt-4">
                         <div class="col-sm-9 col-md-8">
                             <lista-servicios :servicios="servicios"></lista-servicios>
@@ -32,7 +94,7 @@
                         <div class="col-sm-3 col-md-4">
                             <form-servicio :servicio="servicio"></form-servicio>
                         </div>
-                    </div>
+                    </div>-->
             </div>
         </main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.8/uuid.js" integrity="sha256-di30dL7N9597Q8UApQWE7AIjWlR2hbVHreqxh7NiX4I=" crossorigin="anonymous"></script>

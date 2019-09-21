@@ -1,6 +1,6 @@
 Vue.component('lista-servicios',{
     props: ['servicios'],
-    template: `<div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; grid-gap: 2rem;">
+    template: `<div class="services">
                     <servicio v-for="servicio in servicios" :servicio="servicio" :key="servicio.id"></servicio>
                 </div>`
 });
