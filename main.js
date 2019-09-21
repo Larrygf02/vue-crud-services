@@ -75,7 +75,6 @@ Vue.component('form-servicio', {
         },
         save: function() {
         if (this.validate()) {
-                console.log('Holis');
                 if (this.servicio.id != '') {
                     index = this.$root.servicios.findIndex(servicio => servicio.id == this.servicio.id)
                     this.$root.servicios[index].name = this.servicio.name;
@@ -85,7 +84,6 @@ Vue.component('form-servicio', {
                 }
                 this.clean()
             }else {
-                console.log('Hay error');
                 this.has_error = true;
             }
         },
